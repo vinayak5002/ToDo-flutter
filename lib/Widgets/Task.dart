@@ -10,10 +10,11 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
+
+  bool done = false;
+
   @override
   Widget build(BuildContext context) {
-    bool done = false;
-    bool zero = false;
     return Card(
       color: Colors.deepPurple[600],
       child: ListTile(
@@ -25,17 +26,14 @@ class _TaskState extends State<Task> {
         title: InkWell(
           onTap: (){
             print("clicked");
-            if(!zero){
+            if(done){
               setState(() {
-                print("${widget.title}clicked");
-                done = true;
-                zero = true;
+                done = false;
               });
             }
             else{
-              print("done");
-              setState((){
-                done = false;
+              setState(() {
+                done = true;
               });
             }
           },
