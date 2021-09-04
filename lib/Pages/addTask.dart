@@ -50,6 +50,32 @@ class AddTask extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                child: TextField(
+                  decoration: InputDecoration(
+                
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: (Colors.deepPurple[300])!),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: (Colors.deepPurple[300])!),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                
+                    labelText: "Description",
+                    labelStyle: TextStyle(color: Colors.deepPurple[300]),
+                
+                  ),
+
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             )
 
           ],

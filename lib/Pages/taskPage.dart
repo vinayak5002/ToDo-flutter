@@ -53,7 +53,7 @@ class _TaskPageState extends State<TaskPage> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ListView(
-                  children:taskList,
+                  children: taskList,
                 ),
               ),
             )
