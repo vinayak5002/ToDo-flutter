@@ -2,8 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:todo_flutter/Pages/addTask.dart';
 import 'package:todo_flutter/Widgets/Task.dart';
 
-class TaskPage extends StatelessWidget {
-  const TaskPage({ Key? key }) : super(key: key);
+class TaskPage extends StatefulWidget {
+  TaskPage({ Key? key }) : super(key: key);
+
+  @override
+  _TaskPageState createState() => _TaskPageState();
+}
+
+class _TaskPageState extends State<TaskPage> {
+  void deleteTask( Task remove ){
+    print("In delete task");
+    setState(() {
+      taskList.remove(remove);
+    });
+    print(taskList);
+  }
+
+  late List<Task> taskList = [
+    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask),
+    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask),
+    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask),
+    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask),
+    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +40,7 @@ class TaskPage extends StatelessWidget {
             Center(
               child: Text(
                 "ToDo List",
-                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                style: TextStyle(color: Colors.deepPurple[300], fontWeight: FontWeight.bold),
                 textScaleFactor: 3.5,
               ),
             ),
@@ -32,13 +53,7 @@ class TaskPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ListView(
-                  children:[
-                    Task(title: "Task1"),
-                    Task(title: "Task1"),
-                    Task(title: "Task1"),
-                    Task(title: "Task1"),
-                    Task(title: "Task1"),
-                  ]
+                  children:taskList,
                 ),
               ),
             )
