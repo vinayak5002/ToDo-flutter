@@ -18,12 +18,20 @@ class _TaskPageState extends State<TaskPage> {
     print(taskList);
   }
 
+  void onCheck (checkThis) {
+    print(taskList[taskList.indexOf(checkThis)].done);
+    setState(() {
+      taskList[taskList.indexOf(checkThis)].done = !taskList[taskList.indexOf(checkThis)].done;
+    });
+    print(taskList[taskList.indexOf(checkThis)].done);
+  }
+
   late List<Task> taskList = [
-    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask),
-    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask),
-    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask),
-    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask),
-    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask),
+    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask, done: false, onCheck: onCheck,),
+    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask, done: false, onCheck: onCheck,),
+    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask, done: false, onCheck: onCheck,),
+    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask, done: false, onCheck: onCheck,),
+    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask, done: false, onCheck: onCheck,),
   ];
 
   @override
@@ -52,8 +60,11 @@ class _TaskPageState extends State<TaskPage> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ListView(
-                  children: taskList,
+                child: ListView.builder(
+                  itemBuilder: (context, index){
+                    return taskList[index];
+                  },
+                  itemCount: taskList.length,
                 ),
               ),
             )

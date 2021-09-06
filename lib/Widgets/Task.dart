@@ -2,14 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Task extends StatefulWidget {
-  const Task({ Key? key, required this.title, required this.desc, required this.onDelete }) : super(key: key);
+  Task({required this.title, required this.desc, required this.onDelete, required this.done, required this.onCheck });
   
   final String title;
   final String desc;
   final Function onDelete;
+  final Function onCheck;
+  late bool done;
 
   void DeleteThis(){
     onDelete( this );
+  }
+
+  void checkThis(){
+    onCheck( this );
   }
 
   @override
@@ -17,8 +23,6 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
-
-  bool done = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +35,18 @@ class _TaskState extends State<Task> {
 
       child: ListTile(
 
-        leading: done ? Icon(Icons.done, color: Colors.green[700],size: 35,)  : Icon(CupertinoIcons.clock_fill, color: Colors.orange[600],),
+        leading: GestureDetector(
+          onTap: (){
+            print("tapped on icon");
+            widget.checkThis();
+            setState(() {
+            });
+          },
+          child: widget.done ? Icon(CupertinoIcons.check_mark_circled, color: Colors.green,size: 35,)  : Icon(CupertinoIcons.clock_fill, color: Colors.orange[600], size: 30,),
+        ),
         
         title: InkWell(
           onTap: (){
-            print("clicked");
-            if(done){
-              setState(() {
-                done = false;
-              });
-            }
-            else{
-              setState(() {
-                done = true;
-              });
-            }
           },
           child: Text(
             "${widget.title}",
@@ -71,7 +72,7 @@ class _TaskState extends State<Task> {
             widget.DeleteThis();
           },
 
-          child: Icon(Icons.delete, color: Colors.red, size: 25,)
+          child: Icon(Icons.delete, color: Colors.red, size: 30,)
         ),
       )
     );

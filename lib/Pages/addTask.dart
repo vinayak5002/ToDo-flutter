@@ -76,6 +76,17 @@ class AddTask extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
+            ),
+
+            ElevatedButton(
+              onPressed: (){
+                
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text("Add", textScaleFactor: 1.3,),
+              ),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>((Colors.deepPurple[300])!)),
             )
 
           ],
