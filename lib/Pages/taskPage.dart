@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_flutter/Pages/addTask.dart';
-import 'package:todo_flutter/Widgets/Task.dart';
+import 'package:todo_flutter/Widgets/TaskTile.dart';
+import 'package:todo_flutter/models/TaskData.dart';
 
 class TaskPage extends StatefulWidget {
   TaskPage({ Key? key }) : super(key: key);
@@ -10,29 +12,6 @@ class TaskPage extends StatefulWidget {
 }
 
 class _TaskPageState extends State<TaskPage> {
-  void deleteTask( Task remove ){
-    print("In delete task");
-    setState(() {
-      taskList.remove(remove);
-    });
-    print(taskList);
-  }
-
-  void onCheck (checkThis) {
-    print(taskList[taskList.indexOf(checkThis)].done);
-    setState(() {
-      taskList[taskList.indexOf(checkThis)].done = !taskList[taskList.indexOf(checkThis)].done;
-    });
-    print(taskList[taskList.indexOf(checkThis)].done);
-  }
-
-  late List<Task> taskList = [
-    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask, done: false, onCheck: onCheck,),
-    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask, done: false, onCheck: onCheck,),
-    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask, done: false, onCheck: onCheck,),
-    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask, done: false, onCheck: onCheck,),
-    Task(title: "Task1", desc: "Task 1 desc", onDelete: deleteTask, done: false, onCheck: onCheck,),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +41,16 @@ class _TaskPageState extends State<TaskPage> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ListView.builder(
                   itemBuilder: (context, index){
-                    return taskList[index];
+                    return TaskTile(
+                      title: Provider.of<TaskData>(context).taskList[index].title,
+                      desc: Provider.of<TaskData>(context).taskList[index].desc,
+                      done: Provider.of<TaskData>(context).taskList[index].done,
+
+                      onCheck: () => Provider.of<TaskData>(context, listen: false).checkThis(Provider.of<TaskData>(context, listen: false).taskList[index]),
+                      onDelete: () => Provider.of<TaskData>(context, listen: false).deleteTask(Provider.of<TaskData>(context, listen: false).taskList[index]),
+                    );
                   },
-                  itemCount: taskList.length,
+                  itemCount: Provider.of<TaskData>(context).taskList.length,
                 ),
               ),
             )
