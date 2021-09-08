@@ -13,6 +13,7 @@ A to do list app 📄
  - cupertino_icons: ^1.0.2
  - provider: ^6.0.0
  - shared_preferences: ^2.0.7
+ - flutter_launcher_icons: ^0.9.2
 
 ## Features
 
