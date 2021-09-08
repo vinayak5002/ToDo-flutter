@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_flutter/Pages/addTask.dart';
 import 'package:todo_flutter/Widgets/TaskTile.dart';
+import 'package:todo_flutter/models/Task.dart';
 import 'package:todo_flutter/models/TaskData.dart';
 
 class TaskPage extends StatefulWidget {
@@ -12,6 +16,24 @@ class TaskPage extends StatefulWidget {
 }
 
 class _TaskPageState extends State<TaskPage> {
+
+    @override
+  void initState() { 
+    super.initState();
+    loadData();
+  }
+
+  void loadData() async{
+    print("Loading data");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String>? data = prefs.getStringList('todo-data');
+
+    Provider.of<TaskData>(context, listen: false).taskList = data!.map((e) => Task.fromMap(jsonDecode(e))).toList();
+
+    Provider.of<TaskData>(context, listen: false).onLoadNotify();
+
+  }
 
   @override
   Widget build(BuildContext context) {
