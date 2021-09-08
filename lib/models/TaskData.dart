@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:todo_flutter/Widgets/TaskTile.dart';
 
 import 'Task.dart';
 
 class TaskData extends ChangeNotifier{
   late List<Task> taskList = [
-    Task(title: "Task1", desc: "Task 1 desc"),
-    Task(title: "Task1", desc: "Task 1 desc"),
-    Task(title: "Task1", desc: "Task 1 desc"),
-    Task(title: "Task1", desc: "Task 1 desc"),
-    Task(title: "Task1", desc: "Task 1 desc"),
+    Task(title: "Sample task 1", desc: "Sample Task 1 desc"),
+    Task(title: "Sample task 2", desc: "Sample Task 2 desc"),
   ];
 
   void checkThis (Task task){

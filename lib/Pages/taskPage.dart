@@ -22,6 +22,7 @@ class _TaskPageState extends State<TaskPage> {
       body: SafeArea(
 
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
 
             Center(
@@ -30,6 +31,19 @@ class _TaskPageState extends State<TaskPage> {
                 style: TextStyle(color: Colors.deepPurple[300], fontWeight: FontWeight.bold),
                 textScaleFactor: 3.5,
               ),
+            ),
+
+            SizedBox(
+              height: 20,
+            ),
+
+            Text(
+              Provider.of<TaskData>(context).taskList.length.toString() + " Pending",
+              style: TextStyle(
+                color: Colors.deepPurple[300],
+                fontWeight: FontWeight.w800
+              ),
+              textScaleFactor: 1.5,
             ),
 
             SizedBox(

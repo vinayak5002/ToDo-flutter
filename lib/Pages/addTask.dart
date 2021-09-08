@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_flutter/models/TaskData.dart';
 
 class AddTask extends StatelessWidget {
-  const AddTask({ Key? key }) : super(key: key);
+  late String title = " ";
+  late String desc = " ";
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +51,10 @@ class AddTask extends StatelessWidget {
                   ),
 
                   style: TextStyle(color: Colors.white),
+
+                  onChanged: (newText) {
+                    title = newText;
+                  },
                 ),
               ),
             ),
@@ -74,6 +81,10 @@ class AddTask extends StatelessWidget {
                   ),
 
                   style: TextStyle(color: Colors.white),
+
+                  onChanged: (newText){
+                    desc = newText;
+                  },
                 ),
               ),
             ),
@@ -81,6 +92,11 @@ class AddTask extends StatelessWidget {
             ElevatedButton(
               onPressed: (){
                 
+                if(title != " "){
+                  Provider.of<TaskData>(context, listen: false).addTask(title, desc);
+                  Navigator.pop(context);
+                }
+
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
